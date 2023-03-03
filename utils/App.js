@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ScrollView, StyleSheet, Image, Dimensions, Button } from 'react-native'
+import {View, Text, ScrollView, StyleSheet, Image, Dimensions, Pressable } from 'react-native'
 import {NativeModules} from 'react-native'
 import CardTemplate from './components/CardTemplate';
 
@@ -11,7 +11,7 @@ function App() {
 
   const [data, setData] = React.useState([]);
   //toggle render variable, to rerender page
-  const [render, setRender] = React.useState(true);
+  const [renderState, setRenderState] = React.useState(false);
 
   const getData = async () => { 
     try{
@@ -27,7 +27,8 @@ function App() {
   //Call the Java Module in React Native, to get list of Play Store installed application.
   React.useEffect( ()=>{
     getData();
-  },[])
+    console.log(renderState)
+  },[renderState])
 
   //Function to generate a Card for each installed temaplte
   const installedApplication = (data) => {
@@ -40,6 +41,10 @@ function App() {
       </>
     )
   }
+
+  const handleClick = (e) => {
+    setRenderState(!renderState)
+  };
   
   const URI = 'https://i.ibb.co/M9LB3Kq/Glassmorphism-Background.png'
 
@@ -54,9 +59,11 @@ function App() {
       <View style={styles.mainContent}>
         <Text style = {styles.heading}>List of Installed Application</Text>
         {installedApplication(data)}
-        
+        <Text>{renderState}</Text>
+        <Pressable title="refresh" onPress={handleClick} style={styles.button}>
+          <Text style={styles.buttonText}>Refresh</Text>
+        </Pressable>
       </View>
-      <Button title="refresh" onClick={()=>setRender(!render)}></Button>
     </ScrollView>
   </View>
   )
@@ -86,6 +93,26 @@ const styles = StyleSheet.create({
     fontSize:20,
     textDecorationLine: 'underline',
     fontWeight: 'bold'
+  },
+  button:{
+    alignItems: 'center',
+    justifyContent: 'center',
+    // paddingVertical: 12,
+    // paddingHorizontal: 32,
+    borderRadius: 4,
+    // elevation: 3,
+    backgroundColor: 'black',
+    width: 250,
+    height: 30,
+    marginBottom: 10
+  },
+  buttonText:{
+    // fontSize: 16,
+    // lineHeight: 21,
+    // fontWeight: 'bold',
+    // letterSpacing: 0.25,
+    color: 'white',
+
   }
 })
 
