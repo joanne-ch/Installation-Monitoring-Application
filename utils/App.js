@@ -27,7 +27,6 @@ function App() {
   //Call the Java Module in React Native, to get list of Play Store installed application.
   React.useEffect( ()=>{
     getData();
-    console.log(renderState)
   },[renderState])
 
   //Function to generate a Card for each installed temaplte
@@ -97,22 +96,14 @@ const styles = StyleSheet.create({
   button:{
     alignItems: 'center',
     justifyContent: 'center',
-    // paddingVertical: 12,
-    // paddingHorizontal: 32,
     borderRadius: 4,
-    // elevation: 3,
     backgroundColor: 'black',
     width: 250,
     height: 30,
     marginBottom: 10
   },
   buttonText:{
-    // fontSize: 16,
-    // lineHeight: 21,
-    // fontWeight: 'bold',
-    // letterSpacing: 0.25,
     color: 'white',
-
   }
 })
 

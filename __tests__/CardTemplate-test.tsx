@@ -6,7 +6,7 @@ import renderer from "react-test-renderer";
 
 it('CardTemplate should render props correctly', ()=>{
     const value = 'Hello World';
-    const inst = renderer.create(<CardTemplate application="Hello World"></CardTemplate>);
+    const inst = renderer.create(<CardTemplate application={value}></CardTemplate>);
 
     const textInst = inst.root.findByType(Text);
     expect(textInst.props.children).toContain(value)
